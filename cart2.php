@@ -2,7 +2,7 @@
 session_start();
 require('./menu/menu.php');
 require_once ('config.php');
-require_once ('component.php');
+require_once ('component1.php');
 
 
 
@@ -33,6 +33,7 @@ if (isset($_POST['add_to_cart'])){
 	}
 }
 
+
 if(isset($_GET["action"]))
 {
 	if($_GET["action"] == "delete")
@@ -57,17 +58,50 @@ if(isset($_GET["action"]))
 </head>
 <body>
 	<br>
+	<h1 style="color:blue; text-align: center;">Le catalogue</h1>
+	<br>
+	<div class="nav" style="width:70%; margin-left: 150px;">
+		<h2>Filtrer</h2>
+		<select id="prix" class="product__footer" style="width:10%;">
+			<option>Prix</option>
+		</select>
+		<select id="type_bij" class="product__footer" style="width:10%;">
+			<option>Bijoux</option>
+		</select>
+		<select id="type_met" class="product__footer" style="width:10%;">
+			<option>Métal</option>
+		</select>
+		<select id="type_pers" class="product__footer" style="width:10%;">
+			<option>Homme</option>
+		</select>
+	</div>
+	<br>
+	
 	<?php
+	/*if(isset($_GET['choix']) === true){
+		echo $_GET['choix'];
+	}*/
 	$query = "SELECT * FROM tbl_product ORDER BY id ASC";
 	$result = mysqli_query($connect, $query);
 	if(mysqli_num_rows($result) > 0)
-	{
-		while($row = mysqli_fetch_array($result))
-		{
+	{ 
+     	echo'<div style="margin-left: 83px;"><table width="100%"><tr>';
+     	$nb_elem = 0;
+
+		 while($row = mysqli_fetch_array($result))
+		{	
+			if($nb_elem==4){
+				echo'</tr><tr>';
+				$nb_elem = 0;
+			}
 			component($row['id'], $row['name'], $row['image'], $row['price']);
+			$nb_elem++;
 			}
 		}
-	?>
+		echo '</tr></table> </div>';  ?>
+        
+    
+
 	<div class="cart-btns">
 	        <div class="continue__shopping">
 	            <a href="aperçu.php">Aperçu panier</a>
