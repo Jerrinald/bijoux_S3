@@ -52,16 +52,16 @@
             </div>
             <ul class="nav__list">
               <li class="nav__item">
-                <a href="#header" class="nav__link scroll-link">Acceuil</a>
+                <a href="index.php" class="nav__link">Acceuil</a>
               </li>
               <li class="nav__item">
-                <a href="#category" class="nav__link scroll-link">Catalogue</a>
+                <a href="choix_produit.php" class="nav__link">Catalogue</a>
               </li>
               <li class="nav__item">
-                <a href="#news" class="nav__link scroll-link">Pierre</a>
+                <a href="pierre.php" class="nav__link">Pierre</a>
               </li>
               <li class="nav__item">
-                <a href="#contact" class="nav__link scroll-link">Diamant</a>
+                <a href="diamant.php" class="nav__link">Diamant</a>
               </li>
             </ul>
           </div>
