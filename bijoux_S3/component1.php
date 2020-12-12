@@ -11,7 +11,7 @@ function component($productid, $productname, $productimg, $productprice){
         <td style="width:22%">
             <div class="product__thumbnail">
                 <a href="#">
-                <img src="./images/products/iPhone/<?php echo $productimg; ?>" alt=""></a>
+                <img src="./images/products/<?php echo $productimg; ?>" alt=""></a>
                 <br><?php echo $productname; ?>
                 <input type="hidden" name="hidden_name" value="<?php echo $productname; ?>">
                 <br><br>
