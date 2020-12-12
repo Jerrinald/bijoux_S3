@@ -55,7 +55,7 @@
                 <a href="index.php" class="nav__link">Acceuil</a>
               </li>
               <li class="nav__item">
-                <a href="choix_produit.php" class="nav__link">Catalogue</a>
+                <a href="choix_produit.php" class="nav__link ">Catalogue</a>
               </li>
               <li class="nav__item">
                 <a href="pierre.php" class="nav__link">Pierre</a>
