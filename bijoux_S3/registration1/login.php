@@ -95,7 +95,7 @@ if ((isset($_POST['mail']) and $_POST['password'])){
 
 	if($rows1==1 or $rows2==1){
 	    $_SESSION['mail'] = $mail;
-	    header("Location: ../cart2.php");
+	    header("Location: ../index.php");
 	}else{
 		$message = "Le mail ou le mot de passe est incorrect.";
 	}
