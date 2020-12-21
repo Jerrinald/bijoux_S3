@@ -1,5 +1,0 @@
-github :   nom : 95190 
-	   mdp : grenier06*
-
-webhost : nomproj  databij
-	  mdp      grenier06
