@@ -8,7 +8,7 @@
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;700&display=swap" rel="stylesheet" />
 
-  <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon" />
 
 
   <!-- Carousel -->
@@ -18,8 +18,9 @@
 
   <!-- Custom StyleSheet -->
   <link rel="stylesheet" href="./styles.css" />
+  <link rel="stylesheet" href="./style1.css" />
 
-  <title>Diamant</title>
+  <title>Service+ Diamant</title>
 </head>
 
 <body>
@@ -37,7 +38,7 @@
 
           <div class="nav__logo">
             <a href="./index.php" class="scroll-link">
-              Service+ DIAMANT
+              <img style="width: 150px; object-fit: cover; " src="../images/logo.png">
             </a>
           </div>
 
@@ -46,7 +47,7 @@
               <span class="nav__category">DIAMANT</span>
               <a href="#" class="close__toggle">
                 <svg>
-                  <use xlink:href="./images/sprite.svg#icon-cross"></use>
+                  <use xlink:href="../images/sprite.svg#icon-cross"></use>
                 </svg>
               </a>
             </div>
@@ -67,21 +68,21 @@
           </div>
 
           <div class="nav__icons">
-            <a href="./registration1/login.php" class="icon__item">
+            <a href="./login.php" class="icon__item">
               <svg class="icon__user">
-                <use xlink:href="./images/sprite.svg#icon-user"></use>
+                <use xlink:href="../images/sprite.svg#icon-user"></use>
               </svg>
             </a>
 
             <a href="#" class="icon__item">
               <svg class="icon__search">
-                <use xlink:href="./images/sprite.svg#icon-search"></use>
+                <use xlink:href="../images/sprite.svg#icon-search"></use>
               </svg>
             </a>
 
-            <a href="#" class="icon__item">
+            <a href="./aperçu.php" class="icon__item">
               <svg class="icon__cart">
-                <use xlink:href="./images/sprite.svg#icon-shopping-basket"></use>
+                <use xlink:href="../images/sprite.svg#icon-shopping-basket"></use>
               </svg>
               <span id="cart__total">0</span>
             </a>
