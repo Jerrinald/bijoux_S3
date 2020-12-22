@@ -1,10 +1,11 @@
 <?php
-session_start();
-require('../menu/menu.php');
+require_once('../menu/menu.php');
 require_once ('config.php');
 require_once ('component1.php');
 
-
+if (!isset($_SESSION['compteur'])){
+	$_SESSION['compteur']=0;
+}
 
 
 if (isset($_POST['add_to_cart'])){
@@ -19,8 +20,9 @@ if (isset($_POST['add_to_cart'])){
 			'item_quantity'	=>  $_POST["quantity"]		
 		);
 		$_SESSION["shopping_cart"][$count] = $item_array;
+		$_SESSION['compteur']+=1;
 		}else{
-			echo '<script>alert("Item Already Added")</script>';
+			echo '<script>alert("Item deja Ajouté")</script>';
 		}
 	}else{
 		$item_array=array(
@@ -30,9 +32,10 @@ if (isset($_POST['add_to_cart'])){
 			'item_quantity'	=>  $_POST["quantity"]
 		);
 		$_SESSION['shopping_cart'][0]=$item_array;
+		$_SESSION['compteur']+=1;
 	}
+	echo '<script>window.location="pierre.php"</script>';
 }
-
 
 if(isset($_GET["action"]))
 {
