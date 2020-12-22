@@ -1,3 +1,6 @@
+<?php 
+
+session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -84,7 +87,7 @@
               <svg class="icon__cart">
                 <use xlink:href="../images/sprite.svg#icon-shopping-basket"></use>
               </svg>
-              <span id="cart__total">0</span>
+              <span id="cart__total"><?php echo $_SESSION['compteur'] ?></span>
             </a>
           </div>
         </nav>
