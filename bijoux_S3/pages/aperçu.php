@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once ('config.php');
 require('../menu/menu.php');
 
@@ -11,6 +10,7 @@ if(isset($_GET["action"]))
 		{
 			if($values["item_id"] == $_GET["id"])
 			{
+				$_SESSION['compteur']-=1;
 				unset($_SESSION["shopping_cart"][$keys]);
 				//echo '<script>alert("Item Removed")</script>';
 				echo '<script>window.location="aperçu.php"</script>';
@@ -19,14 +19,47 @@ if(isset($_GET["action"]))
 	}
 }
 ?>
+<style type="text/css">
+.styled {
+	margin-left: 550px;
+	margin-top: 50px;
+    border: 0;
+    line-height: 2.5;
+    padding: 10 20px;
+    font-size: 1rem;
+    text-align: center;
+    color: #fff;
+    text-shadow: 1px 1px 1px #000;
+    border-radius: 10px;
+    background-color: rgba(220, 0, 0, 1);
+    background-image: linear-gradient(to top left,
+                                      rgba(0, 0, 0, .2),
+                                      rgba(0, 0, 0, .2) 30%,
+                                      rgba(0, 0, 0, 0));
+    box-shadow: inset 2px 2px 3px rgba(255, 255, 255, .6),
+                inset -2px -2px 3px rgba(0, 0, 0, .6);
+
+}
+
+.styled:hover {
+    background-color: rgba(255, 0, 0, 1);
+}
+
+.styled:active {
+    box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),
+                inset 2px 2px 3px rgba(0, 0, 0, .6);
+}
+</style>
+
+
 <br/>
-<h3>Order Details</h3>
+<h3>Details panier</h3>
 <div class="table-responsive">
 	<table>
 		<tr>
-			<th width="40%">Item Name</th>
-			<th width="10%">Quantity</th>
-			<th width="20%">Price</th>
+			<th width="40%">Nom produit</th>
+			<th width="10%">Quantite</th>
+			<th width="20%">Prix</th>
 			<th width="15%">Total</th>
 			<th width="5%">Action</th>
 		</tr>
@@ -41,7 +74,7 @@ if(isset($_GET["action"]))
 					<td><?php echo $values["item_quantity"]; ?></td>
 					<td><?php echo $values["item_price"]; ?></td>
 					<td><?php echo number_format($values["item_quantity"] * $values["item_price"], 2); ?></td>
-					<td><a href="aperçu.php?action=delete&id=<?php echo $values["item_id"]; ?>"><span class="text-danger">Remove</span></a></td>
+					<td><a href="aperçu.php?action=delete&id=<?php echo $values["item_id"]; ?>"><span class="text-danger">Supprimer</span></a></td>
 				</tr><br><br>
 				<?php
 						$total = $total + ($values["item_quantity"] * $values["item_price"]);
@@ -49,10 +82,12 @@ if(isset($_GET["action"]))
 				?>
 				<tr>
 					<td colspan="3" align="right">Total</td>
-					<td align="right">$ <?php echo number_format($total, 2); ?></td>
+					<td align="right"> <?php echo number_format($total, 2); ?></td>
 					<td></td>
 				</tr>
 				<?php
 				}
 				?>
 	</table>
+
+	<input class="favorite styled"        type="button"        value="Finalisez commande">
