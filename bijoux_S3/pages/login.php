@@ -2,7 +2,7 @@
 require('config.php');
 require('../menu/menu.php');
 
-session_start();
+
 
 
 if ((isset($_POST['mail']) and $_POST['password'])){
