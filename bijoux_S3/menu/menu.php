@@ -1,9 +1,12 @@
 <?php 
 
-session_start(); 
-if (!isset($_SESSION['shopping_cart'])){
-  $_SESSION['compteur']=0;
+
+require_once('./session_login.php');
+
+if (!isset($_SESSION[$compte]['shopping_cart'])){
+  $_SESSION[$compte]['compteur']=0;
 }
+var_dump($_SESSION);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -91,7 +94,7 @@ if (!isset($_SESSION['shopping_cart'])){
               <svg class="icon__cart">
                 <use xlink:href="../images/sprite.svg#icon-shopping-basket"></use>
               </svg>
-              <span id="cart__total"><?php echo $_SESSION['compteur'] ?></span>
+              <span id="cart__total"><?php echo $_SESSION[$compte]['compteur'] ?></span>
             </a>
           </div>
         </nav>

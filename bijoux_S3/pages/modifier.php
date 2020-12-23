@@ -11,7 +11,7 @@ if(isset($_GET["action"]))
 		$res = mysqli_query($connect, $del);
 		if($res)
 		{
-			echo '<script>alert("Produit supprimer")</script>';
+			echo '<script>alert("Produit supprime")</script>';
 			echo '<script>window.location="modifier.php"</script>';
 		}
 	}
