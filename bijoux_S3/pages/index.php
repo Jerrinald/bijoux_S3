@@ -420,7 +420,7 @@ require('../menu/menu.php');
         </div>
     </div>
       <div class="continue__shopping" style="margin-left: 550px;" >
-              <a href="gestion_utilisateur.php">Gestion utilisateurs</a>
+              <a href="gestion_admin.php">Gestion utilisateurs/produits</a>
       </div>
     </section>
 

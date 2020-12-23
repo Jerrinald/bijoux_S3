@@ -3,9 +3,6 @@ require('../menu/menu.php');
 require_once ('config.php');
 require_once ('component1.php');
 
-if (!isset($_SESSION['compteur'])){
-	$_SESSION['compteur']=0;
-}
 
 
 if (isset($_POST['add_to_cart'])){
@@ -72,11 +69,6 @@ if(isset($_GET["action"]))
 			<option>Poids</option>
 			<option>Prix au carat</option>
 		</select>
-	</div>
-	<div class="cart-btns" style="width:70%; margin-left: 150px;">
-		<div class="continue__shopping">
-	        	<a href="gestion_produit.php">Gestion produit</a>
-		</div>
 	</div>
 	
 	<?php

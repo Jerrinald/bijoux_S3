@@ -1,6 +1,10 @@
 <?php 
 
-session_start(); ?>
+session_start(); 
+if (!isset($_SESSION['shopping_cart'])){
+  $_SESSION['compteur']=0;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
