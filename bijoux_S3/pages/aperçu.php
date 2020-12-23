@@ -20,8 +20,11 @@ if(isset($_GET["action"]))
 }
 ?>
 <style type="text/css">
+table { border-collapse : collapse; margin : auto;  margin-left: 280px;}
+td,th { border : 0px; width : 200px; height : 30px; text-align : center;}
+
 .styled {
-	margin-left: 550px;
+	margin-left: 600px;
 	margin-top: 50px;
     border: 0;
     line-height: 2.5;
@@ -53,15 +56,15 @@ if(isset($_GET["action"]))
 
 
 <br/>
-<h3>Details panier</h3>
+<h3 style="text-align: center; margin-top: 25px;">Details panier</h3>
 <div class="table-responsive">
 	<table>
 		<tr>
-			<th width="40%">Nom produit</th>
-			<th width="10%">Quantite</th>
-			<th width="20%">Prix</th>
-			<th width="15%">Total</th>
-			<th width="5%">Action</th>
+			<th>Nom produit</th>
+			<th>Quantite</th>
+			<th>Prix</th>
+			<th>Total</th>
+			<th>Action</th>
 		</tr>
 		<?php
 		
@@ -81,9 +84,7 @@ if(isset($_GET["action"]))
 					}
 				?>
 				<tr>
-					<td colspan="3" align="right">Total</td>
-					<td align="right"> <?php echo number_format($total, 2); ?></td>
-					<td></td>
+					<td colspan="4" align="right">Total : <?php echo number_format($total, 2); ?></td>
 				</tr>
 				<?php
 				}
