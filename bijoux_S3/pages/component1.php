@@ -15,7 +15,7 @@ function component($productid, $productname, $productimg, $productprice){
                 <br><?php echo $productname; ?>
                 <input type="hidden" name="hidden_name" value="<?php echo $productname; ?>">
                 <br><br>
-                <span class="new__price">$<?php echo $productprice; ?></span>
+                <span class="new__price"><?php echo $productprice; ?></span>
                 <input type="hidden" name="hidden_price" value="<?php echo $productprice; ?>"> 
                 <div class="input-counter">
                     <div>
@@ -33,7 +33,7 @@ function component($productid, $productname, $productimg, $productprice){
                     </div>
                 </div>                  
                 <div class="price">
-                    <span class="new__price">$<?php echo 'Total : ' . $productprice; ?></span>
+                    <span class="new__price"><?php echo 'Total : ' . $productprice; ?></span>
                 </div>
                 <input type="submit" value="Ajouter" name="add_to_cart" class="product__btn" style="width:65%">
             </div>

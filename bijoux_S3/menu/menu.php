@@ -81,7 +81,7 @@ if (!isset($_SESSION['shopping_cart'])){
               </svg>
             </a>
 
-            <a href="#" class="icon__item">
+            <a href="barre_de_recherche.php" class="icon__item">
               <svg class="icon__search">
                 <use xlink:href="../images/sprite.svg#icon-search"></use>
               </svg>
