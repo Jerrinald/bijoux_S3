@@ -81,7 +81,7 @@ require('../menu/menu.php');
               <div class="collection__data">
                 <span>Nouveaux modèles disponible</span>
                 <h1>Amethyste violet</h1>
-                <a href="#shop">ACHETEZ MAINTENANT</a>
+                <a href="choix_produit.php">ACHETEZ MAINTENANT</a>
               </div>
             </div>
           </div>
@@ -91,16 +91,16 @@ require('../menu/menu.php');
             </div>
             <div class="collection__content">
               <div class="collection__data">
-                <span>Assemblez votre propre pierre</span>
+                <span>Obtenez la pierre qui vous convient</span>
                 <h1>Emeraude</h1>
-                <a href="#">ACHETEZ MAINTENANT</a>
+                <a href="pierre.php">ACHETEZ MAINTENANT</a>
               </div>
             </div>
           </div>
       </section>
 
       <!-- Latest Products -->
-      <section class="section latest__products" id="latest">
+      <!--<section class="section latest__products" id="latest">
         <div class="title__container">
           <div class="section__title active" data-id="Latest Products">
             <span class="dot"></span>
@@ -388,7 +388,7 @@ require('../menu/menu.php');
             </div>
           </div>
         </div>
-      </section>
+      </section>-->
 
       <section class="category__section section" id="category">
         <div class="tab__list">
@@ -419,7 +419,7 @@ require('../menu/menu.php');
           <div class="category__center"></div>
         </div>
     </div>
-      <div class="continue__shopping" style="margin-left: 550px;" >
+      <div class="continue__shopping" style="margin-left: 550px; margin-bottom: 45px;" >
               <a href="gestion_admin.php">Gestion utilisateurs/produits</a>
       </div>
     </section>
