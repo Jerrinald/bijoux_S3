@@ -18,10 +18,10 @@ if (isset($_REQUEST['nom'], $_REQUEST['prenom'], $_REQUEST['date_nai'], $_REQUES
 
             $quid = "INSERT into `users` (nom, prenom, niv_role)
               VALUES ('$nom', '$prenom', 2)";
-            $resid = mysqli_query($conn, $quid);
+            $resid = mysqli_query($connect, $quid);
 
             $se_id = "SELECT id_user from users where nom='$nom' and prenom='$prenom'";
-            $result=mysqli_query($conn, $se_id);
+            $result=mysqli_query($connect, $se_id);
             
             $rows = mysqli_num_rows($result);
             $row = mysqli_fetch_array($result);
@@ -30,7 +30,7 @@ if (isset($_REQUEST['nom'], $_REQUEST['prenom'], $_REQUEST['date_nai'], $_REQUES
             $query = "INSERT into `particuliers` (id_part, nom_part, prenom_part, date_nai_part, adr_mail_part, num_tel, password)
               VALUES ('$id', '$nom', '$prenom', '$date_nai', '$adr_mail', '$num_tel', '".hash('sha256', $password)."')";
               // Exécute la requête sur la base de données
-            $res = mysqli_query($conn, $query);
+            $res = mysqli_query($connect, $query);
             if($res){
                echo "<div class='sucess'>
                      <h3>Vous êtes inscrit avec succès.</h3>

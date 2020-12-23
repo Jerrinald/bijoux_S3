@@ -20,7 +20,7 @@ if (isset($_REQUEST['nom'], $_REQUEST['prenom'], $_REQUEST['date_nai'], $_REQUES
               $password = $_REQUEST['password'];
               
               $quid = "INSERT into `users` (nom, prenom, niv_role)
-              VALUES ('$nom', '$prenom', 2)";
+              VALUES ('$nom', '$prenom', 3)";
               $resid = mysqli_query($connect, $quid);
               var_dump($resid);
               $se_id = "SELECT id_user from users where nom='$nom' and prenom='$prenom'";
