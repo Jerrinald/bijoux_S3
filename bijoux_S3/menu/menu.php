@@ -15,7 +15,6 @@ if(!isset($_SESSION[$mail]['shopping_cart'])){
   $_SESSION[$mail]['compteur'] =0;
 }
 
-var_dump($_SESSION);
 ?>
 <!DOCTYPE html>
 <html lang="en">

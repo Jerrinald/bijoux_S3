@@ -421,7 +421,7 @@ require('../menu/menu.php');
     </div>
       <div class="continue__shopping" style="margin-left: 550px; margin-bottom: 45px;" >
               <a href="gestion_admin.php">Gestion utilisateurs/produits</a>
-      </div>
+      </div>" 
     </section>
 
     

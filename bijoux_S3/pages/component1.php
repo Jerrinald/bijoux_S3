@@ -10,9 +10,9 @@ function component($productid, $productname, $productimg, $productprice){
         <form method="post" name="ajout" action="?action=add&id=<?php echo $productid;?> ">
         <td style="width:22%">
             <div class="product__thumbnail">
-                <a href="#">
+                <a href="details_produit.php?id=<?php echo $productid;?>">
                 <img src="../images/products/<?php echo $productimg; ?>" alt=""></a>
-                <br><?php echo $productname; ?>
+                <br> <a href="details_produit.php?id=<?php echo $productid;?>"><?php echo $productname; ?></a>
                 <input type="hidden" name="hidden_name" value="<?php echo $productname; ?>">
                 <br><br>
                 <span class="new__price"><?php echo $productprice; ?></span>

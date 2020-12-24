@@ -1,0 +1,12 @@
+admin :
+ mail fictif : super_user@gmail.com
+ mdp : admin_serviceplus
+
+collaborateur A : 
+ mail fictif : collaboA@gmail.com
+ mdp : collaboA_serviceplus
+
+collaborateur B : 
+ mail fictif : collaboB@gmail.com
+ mdp : collaboB_service_plus
+

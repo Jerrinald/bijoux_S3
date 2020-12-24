@@ -1,8 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-<link rel="stylesheet" href="./registration1/style1.css" />
-</head>
 <body>
 <?php
 require('../menu/menu.php');
