@@ -1,7 +1,9 @@
 ﻿<?php
 require_once('../menu/menu.php');
 
+if($_SESSION[$mail]['niv_role'] == 1){
 ?>
+
 
 <form class="box" action="session_login.php" method="post" name="login">
 <h1 class="box-logo box-title"><a href="">Connexion</a></h1>
@@ -14,5 +16,10 @@ require_once('../menu/menu.php');
     <p class="errorMessage"><?php echo $message; ?></p>
 <?php } ?>
 </form>
+<?php  }else{ ?>
+	<form class="box" action="logout.php" method="post" name="login">
+		<input type="submit" value="Deconnexion " name="submit" class="box-button">
+	</form>
+<?php } ?>
 </body>
 </html>

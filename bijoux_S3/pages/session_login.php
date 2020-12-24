@@ -3,11 +3,6 @@ require_once('config.php');
 session_start(); 
 
 
-$compte = 'visiteur';
-if(!isset($_SESSION[$compte])){
-	$_SESSION[$compte]['niv_role'] =1;
-}
-
 if ((isset($_POST['mail']) and $_POST['password'])){
 	$mail = stripslashes($_REQUEST['mail']);
 	$mail = mysqli_real_escape_string($connect, $mail);
@@ -23,6 +18,7 @@ if ((isset($_POST['mail']) and $_POST['password'])){
   $rows2 = mysqli_num_rows($result2);
 
 	if($rows1==1 or $rows2==1){
+		//unset($_SESSION[$compte]);
 		$niv_pro = "SELECT niv_role FROM `users` INNER JOIN `professionnels` on `users`.id_user = `professionnels`.id_pro WHERE adr_mail_pro='$mail'";
 		$niv_part = "SELECT niv_role FROM `users` INNER JOIN `particuliers` on `users`.id_user = `particuliers`.id_part WHERE adr_mail_pro='$mail'";
 		$niv_admin = "SELECT niv_role FROM `users` INNER JOIN `administrateurs` on `users`.id_user = `administrateurs`.id_admin WHERE adr_mail_admin='$mail'";
@@ -35,26 +31,40 @@ if ((isset($_POST['mail']) and $_POST['password'])){
 		if($res_pro){
 			$row_pro = mysqli_fetch_array($res_pro);
 		    $que_pro = $row_pro['niv_role'];
-		    $compte = $mail;
-		    $_SESSION[$compte]['niv_role'] = $que_pro;
+		    $_SESSION['mail'] = $mail; 
+		    $_SESSION['niv_role'] = $que_pro;
 		}elseif ($res_part) {
 			$row_part = mysqli_fetch_array($res_part);
 		    $que_part = $row_part['niv_role'];
-		    $compte = $mail;
-		    $_SESSION[$compte]['niv_role'] = $que_part;
+		    $_SESSION['mail'] = $mail;
+		    $_SESSION['niv_role'] = $que_part;
 		}elseif ($res_admin) {
 			$row_admin = mysqli_fetch_array($res_admin);
 		    $que_admin = $row_admin['niv_role'];
-		    $compte = $mail;
-		    $_SESSION[$compte]['niv_role'] = $que_admin;
+		    $_SESSION['mail'] = $mail;
+		    $_SESSION['niv_role']= $que_admin;
 		}
-	    var_dump($_SESSION);
-	    //header("Location: index.php");
+	    header("Location: index.php");
 
 	}else{
 		//$message = "Le mail ou le mot de passe est incorrect.";
 		header("Location: login.php");
 	}
 }
+
+/*if($compte == 'visiteur'){
+	$_SESSION[$compte]['niv_role'] =1;
+}
+else{
+	unset($_SESSION['visiteur']);
+	$_SESSION[$compte]['niv_role'] = $_SESSION[$compte]['niv_role'];
+}*/
+/*if (!isset($_SESSION[$compte]['shopping_cart'])){
+    $_SESSION[$compte]['compteur']=0;
+  }*/
+
+
+
+
  ?>
 

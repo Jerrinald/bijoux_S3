@@ -1,11 +1,20 @@
 <?php 
 
+session_start();
 
-require_once('./session_login.php');
-
-if (!isset($_SESSION[$compte]['shopping_cart'])){
-  $_SESSION[$compte]['compteur']=0;
+if(isset($_SESSION['mail']) && isset($_SESSION['niv_role'])){
+   unset($_SESSION['visiteur']);
+   $mail = $_SESSION['mail'];
+   $niv_role = $_SESSION['niv_role'];
+}else{
+  $mail = 'visiteur';
+  $niv_role = 1;
 }
+$_SESSION[$mail]['niv_role'] = $niv_role;
+if(!isset($_SESSION[$mail]['shopping_cart'])){
+  $_SESSION[$mail]['compteur'] =0;
+}
+
 var_dump($_SESSION);
 ?>
 <!DOCTYPE html>
@@ -94,7 +103,7 @@ var_dump($_SESSION);
               <svg class="icon__cart">
                 <use xlink:href="../images/sprite.svg#icon-shopping-basket"></use>
               </svg>
-              <span id="cart__total"><?php echo $_SESSION[$compte]['compteur'] ?></span>
+              <span id="cart__total"><?php echo $_SESSION[$mail]['compteur'] ?></span>
             </a>
           </div>
         </nav>

@@ -6,12 +6,12 @@ if(isset($_GET["action"]))
 {
 	if($_GET["action"] == "delete")
 	{
-		foreach($_SESSION[$compte]["shopping_cart"] as $keys => $values)
+		foreach($_SESSION[$mail]["shopping_cart"] as $keys => $values)
 		{
 			if($values["item_id"] == $_GET["id"])
 			{
-				$_SESSION[$compte]['compteur']-=1;
-				unset($_SESSION[$compte]["shopping_cart"][$keys]);
+				$_SESSION[$mail]['compteur']-=1;
+				unset($_SESSION[$mail]["shopping_cart"][$keys]);
 				//echo '<script>alert("Item Removed")</script>';
 				echo '<script>window.location="aperçu.php"</script>';
 			}
@@ -68,9 +68,9 @@ td,th { border : 0px; width : 200px; height : 30px; text-align : center;}
 		</tr>
 		<?php
 		
-		if(!empty($_SESSION[$compte]["shopping_cart"])){
+		if(!empty($_SESSION[$mail]["shopping_cart"])){
 			$total = 0;
-			foreach($_SESSION[$compte]["shopping_cart"] as $keys => $values){
+			foreach($_SESSION[$mail]["shopping_cart"] as $keys => $values){
 				?>
 				<tr>
 					<td><?php echo $values["item_name"]; ?></td>

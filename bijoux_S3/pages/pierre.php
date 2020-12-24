@@ -5,18 +5,18 @@ require_once ('component1.php');
 
 
 if (isset($_POST['add_to_cart'])){
-	if (isset($_SESSION[$compte]['shopping_cart'])){
-		$item_array_id= array_column($_SESSION[$compte]["shopping_cart"], "item_id");
+	if (isset($_SESSION[$mail]['shopping_cart'])){
+		$item_array_id= array_column($_SESSION[$mail]["shopping_cart"], "item_id");
 		if(!in_array($_GET["id"], $item_array_id)){
-			$count = count($_SESSION[$compte]["shopping_cart"]);
+			$count = count($_SESSION[$mail]["shopping_cart"]);
 			$item_array=array(
 			'item_id'		=>  $_GET["id"],
 			'item_name'		=>  $_POST["hidden_name"],
 			'item_price'	=>  $_POST["hidden_price"],
 			'item_quantity'	=>  $_POST["quantity"]		
 		);
-		$_SESSION[$compte]["shopping_cart"][$count] = $item_array;
-		$_SESSION[$compte]['compteur']+=1;
+		$_SESSION[$mail]["shopping_cart"][$count] = $item_array;
+		$_SESSION[$mail]['compteur']+=1;
 		}else{
 			echo '<script>alert("Item deja Ajouté")</script>';
 		}
@@ -27,8 +27,8 @@ if (isset($_POST['add_to_cart'])){
 			'item_price'	=>  $_POST["hidden_price"],
 			'item_quantity'	=>  $_POST["quantity"]
 		);
-		$_SESSION[$compte]['shopping_cart'][0]=$item_array;
-		$_SESSION[$compte]['compteur']+=1;
+		$_SESSION[$mail]['shopping_cart'][0]=$item_array;
+		$_SESSION[$mail]['compteur']+=1;
 	}
 	echo '<script>window.location="pierre.php"</script>';
 }
