@@ -2,10 +2,6 @@
 function component($productid, $productname, $productimg, $productprice){
     ?>
     <!DOCTYPE html>
-    <html>
-    <head>
-        <link rel="stylesheet" href="style1.css" />
-    </head>
     <body>
         <form method="post" name="ajout" action="?action=add&id=<?php echo $productid;?> ">
         <td style="width:22%">

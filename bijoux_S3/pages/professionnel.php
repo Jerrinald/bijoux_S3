@@ -2,7 +2,7 @@
 require('config.php');
 require('../menu/menu.php');
 
-if (isset($_REQUEST['nom'], $_REQUEST['prenom'], $_REQUEST['date_nai'], $_REQUEST['nom_soc'], $_REQUEST['adr_mail'], $_REQUEST['num_tel'], $_REQUEST['num_sir'], $_REQUEST['password'])){
+if (isset($_REQUEST['nom'], $_REQUEST['prenom'], $_REQUEST['date_nai'], $_REQUEST['nom_soc'], $_REQUEST['adr_mail'], $_REQUEST['num_tel'], $_REQUEST['num_sir'], $_REQUEST['password'], $_REQUEST['mat'])){
   if(preg_match("/^[a-zA-Z]+$/", $_REQUEST['nom'])){
     $nom = $_REQUEST['nom'];
     if(preg_match("/^[a-zA-Z]+$/", $_REQUEST['prenom'])){
@@ -18,6 +18,7 @@ if (isset($_REQUEST['nom'], $_REQUEST['prenom'], $_REQUEST['date_nai'], $_REQUES
               $num_tel = $_REQUEST['num_tel'];
               $nom_soc = $_REQUEST['nom_soc'];
               $password = $_REQUEST['password'];
+              $mat = $_REQUEST['mat'];
               
               $quid = "INSERT into `users` (nom, prenom, niv_role)
               VALUES ('$nom', '$prenom', 3)";
@@ -30,8 +31,8 @@ if (isset($_REQUEST['nom'], $_REQUEST['prenom'], $_REQUEST['date_nai'], $_REQUES
               $rows = mysqli_num_rows($result);
               $row = mysqli_fetch_array($result);
               $id = $row['id_user'];
-              $query = "INSERT into `professionnels` (id_pro, nom_pro, prenom_pro, date_nai_pro, nom_societe, adr_mail_pro, num_tel, num_siret, password)
-                VALUES ('$id', '$nom', '$prenom', '$date_nai', '$nom_soc', '$adr_mail', '$num_tel', '$num_sir', '".hash('sha256', $password)."')";
+              $query = "INSERT into `professionnels` (id_pro, nom_pro, prenom_pro, date_nai_pro, nom_societe, adr_mail_pro, num_tel, num_siret, password, assigne, interet)
+                VALUES ('$id', '$nom', '$prenom', '$date_nai', '$nom_soc', '$adr_mail', '$num_tel', '$num_sir', '".hash('sha256', $password)."', false, '$mat')";
                 // Exécute la requête sur la base de données
               $res = mysqli_query($connect, $query);
               if($res){
@@ -70,14 +71,8 @@ if (isset($_REQUEST['nom'], $_REQUEST['prenom'], $_REQUEST['date_nai'], $_REQUES
     <label>Veuillez saisir votre mot de passe :</label>
     <input type="password" class="box-input" name="password" placeholder="Exemple : titi01" required />
     <label>Plus interessé par: (juste à titre informatif)</label>
-    <div>
-      <input type="radio" id="contactChoice1"
-       name="contact" value="email">
-      <label for="contactChoice1">Les pierres</label>
-      <input type="radio" id="contactChoice2"
-       name="contact" value="telephone">
-      <label for="contactChoice2">Les diamants</label>
-    </div>
+    <input type="radio" name="mat" value="pierres" > Les pierres 
+    <input type="radio" name="mat" value="diamants" > Les diamants 
     <br/><input type="submit" name="submit" value="S'inscrire" class="box-button" />
     <p class="box-register">Déjà inscrit? <a href="login.php">Connectez-vous ici</a></p>
 </form>

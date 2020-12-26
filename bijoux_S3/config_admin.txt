@@ -8,5 +8,5 @@ collaborateur A :
 
 collaborateur B : 
  mail fictif : collaboB@gmail.com
- mdp : collaboB_service_plus
+ mdp : collaboB_serviceplus
 

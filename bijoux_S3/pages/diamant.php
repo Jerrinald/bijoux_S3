@@ -4,7 +4,6 @@ require_once ('config.php');
 require_once ('component1.php');
 
 
-
 if (isset($_POST['add_to_cart'])){
 	if (isset($_SESSION[$mail]['shopping_cart'])){
 		$item_array_id= array_column($_SESSION[$mail]["shopping_cart"], "item_id");
@@ -55,7 +54,23 @@ if(isset($_GET["action"]))
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" href="styles.css" />
+	<script>
+	function showUser(str) {
+	  if (str == "") {
+	    document.getElementById("txtHint").innerHTML = "";
+   		return;
+	  } else {
+	    var xmlhttp = new XMLHttpRequest();
+	    xmlhttp.onreadystatechange = function() {
+	      if (this.readyState == 4 && this.status == 200) {
+	        document.getElementById("txtHint").innerHTML = this.responseText;
+	      }
+	    };
+	    xmlhttp.open("GET","get_diamant.php?q="+str,true);
+	    xmlhttp.send();
+	  }
+	}
+	</script>
 </head>
 <body>
 	<br>
@@ -63,21 +78,17 @@ if(isset($_GET["action"]))
 	<br>
 	<div class="nav" style="width:20%; margin-left: 150px;">
 		<h2>Filtrer</h2>
-		<select id="prix" class="product__footer" style="width:35%;">
-			<option>Filtrer par</option>
-			<option>Forme</option>
-			<option>Poids</option>
-			<option>Prix au carat</option>
+		<select class="product__footer" id="users" name="users" onchange="showUser(this.value)" style="width:35%;">
+			<option value="id_pdt">Filtrer par</option>
+			<option value="prix_pdt">Prix</option>
+			<option value="forme">Forme</option>
+			<option value="poids">Poids</option>
+			<option value="prix_carat">Prix au carat</option>
 		</select>
 	</div>
-	
+	<br>
+	<div id="txtHint">
 	<?php
-	/*if(isset($_GET['choix']) === true){
-		echo $_GET['choix'];
-	}*/
-	 /*$q = $_GET['q'];
-	 mysqli_select_db($connect,"ajax_demo");
-	 var_dump($q);*/
 	$query = "SELECT * FROM produits where type_mat='diamant' ";
 	$result = mysqli_query($connect, $query);
 	if(mysqli_num_rows($result) > 0)
@@ -94,8 +105,9 @@ if(isset($_GET["action"]))
 			component($row['id_pdt'], $row['nom_pdt'], $row['nom_img'], $row['prix_pdt']);
 			$nb_elem++;
 		}
+		echo '</tr></table> </div>';
 	}
-		echo '</tr></table> </div>';  ?>
-        
+		 ?>
+     </div> 
     <br/>
 </html>

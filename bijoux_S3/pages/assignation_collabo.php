@@ -1,7 +1,6 @@
 <?php
 require('../menu/menu.php');
-require_once ('config.php');
-require_once ('component1.php'); ?>
+require_once ('config.php'); ?>
 
 <style type="text/css">
 	p,
@@ -18,7 +17,7 @@ input {
 
 button,
 .styled {
-    margin-left: 580px;
+    margin-left: 600px;
     border: 0;
     line-height: 2.5;
     padding: 0 20px;
@@ -45,27 +44,51 @@ button,
                 inset 2px 2px 3px rgba(0, 0, 0, .6);
 }
 
+.as{
+  margin-top: 70px;
+  text-align: center;
+}
 </style>
 
-<p>Monsieur X vient de s'inscrire. Il semblerait qu'il soit plus interessé par les [$produits(code php)] </p>
-<br/><br/><br/>
+<?php 
+if(isset($_POST['submit'])){
+  $query = "UPDATE `professionnels` SET assigne=1 WHERE id_pro= " . $_GET["id"];
+  $result = mysqli_query($connect, $query);
 
-<p>A qui voulez-vous l'assignez ?</p><br/>
+  $assign = "INSERT into `assignation` (id_pro, id_collabo)
+              VALUES (" . $_GET['id'] ."," . $_REQUEST['col'] .")";
+  $res = mysqli_query($connect, $assign);
 
-<div>
-  <input type="checkbox" id="1" name="1"
-         >
-  <label for="1"> Collaborateur A </label>
-</div>
+    if($result and $res){
+      echo "<p>Assignation réalisé avec succès. <a href='liste_a_assigner.php'>Cliquez ici pour revenir à la liste</a></p>";
+    }else{
+      echo "Echec";
+    }
+}else{
 
-<div>
-  <input type="checkbox" id="2" name="2">
-  <label for="2"> Collaborateur B</label>
-</div>
-<br/>
-<div>
-    <button class="favorite styled"
-        type="checkbox">
-    Confirmer
-</button>
+  if(isset($_GET["id"]) and preg_match("/^\d+$/", $_GET["id"])){
+    $query = "SELECT * FROM professionnels where id_pro=". $_GET["id"];
+    $result = mysqli_query($connect, $query); ?>
+
+   <div class="as">
+    <?php while($row = mysqli_fetch_array($result)){
+      echo "<p>Monsieur " . $row['nom_pro'] . " vient de s'inscrire. Il semblerait qu'il soit plus interessé par les " . $row['interet'] . "</p><br/>";
+    }
+  }
+  ?>
   </div>
+  <p>A qui voulez-vous l'assignez ?</p><br/><br/>
+
+  <form action="?id=<?php echo $_GET["id"]; ?>" method="post">
+    <div>
+    <input type="checkbox" name="col" value="2"> Collaborateur A
+    </div>
+    <div>
+    <input type="checkbox" name="col" value="3"> Collaborateur B
+    </div>
+    <br/>
+    <div>
+    <input type="submit" name="submit" value="Confirmer" class="favorite styled" />
+    </div>
+  </form>
+<?php } ?>

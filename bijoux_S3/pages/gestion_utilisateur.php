@@ -29,11 +29,13 @@ td,th { border : 1px solid black; width : 200px; height : 30px; text-align : cen
 		        <td> <?php echo $row['id_user'] ?> </td>
 		        <td> <?php echo $row['nom'] ?> </td>
 		        <td> <?php echo $row['prenom']?> </td>
-		        <?php if($row['niv_role']==1){?>
+		        <?php if($row['niv_role']==5){?>
 		        	<td> Administrateur </td>
-		        <?php }elseif ($row['niv_role']==2) {?>
-		        	<td> Profesionnel </td>
-		        <?php }else{?>
+		        <?php }elseif ($row['niv_role']==3) {?>
+		        	<td> Professionnel </td>
+		        <?php }elseif ($row['niv_role']==4) {?>
+		        	<td> Collaborateur </td>
+		        <?php }else{ ?>
 		        	<td> Particulier </td>
 		        <?php } ?>
 		        <td class="sansBordure"> 
