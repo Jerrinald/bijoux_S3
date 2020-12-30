@@ -11,7 +11,7 @@ function component1($productid, $productname, $productimg, $productprice){
                 <br> <a href="details_produit.php?id=<?php echo $productid;?>"><?php echo $productname; ?></a>
                 <input type="hidden" name="hidden_name" value="<?php echo $productname; ?>">
                 <br><br>
-                <span class="new__price"><?php echo "Prix HT : " . $productprice; ?></span>
+                <span class="new__price"><?php if($productprice!=0){echo "Prix HT : " . $productprice;}else{echo "A préciser";} ?></span>
                 <input type="hidden" name="hidden_price" value="<?php echo $productprice; ?>"> 
                 <div class="input-counter">
                     <div>
@@ -51,7 +51,7 @@ function component2($productid, $productname, $productimg, $productprice){
                 <br> <a href="details_produit.php?id=<?php echo $productid;?>"><?php echo $productname; ?></a>
                 <input type="hidden" name="hidden_name" value="<?php echo $productname; ?>">
                 <br><br>
-                <span class="new__price"><?php echo "Prix TTC : " . $productprice; ?></span>
+                <span class="new__price"><?php if($productprice!=0){echo "Prix TTC : " . $productprice;}else{echo "A préciser";} ?></span>
                 <input type="hidden" name="hidden_price" value="<?php echo $productprice; ?>"> 
                 <div class="input-counter">
                     <div>

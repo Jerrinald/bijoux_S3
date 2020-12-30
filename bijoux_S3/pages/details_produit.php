@@ -51,7 +51,19 @@ if(isset($_GET["id"]) and preg_match("/^\d+$/", $_GET["id"])){
 			?> <center><img src="../images/products/<?php echo $row['nom_img']; ?>" alt=""></center>
 			<div class="details"><ul><?php
 			echo "<li> <h2>Nom du produit : </h2> <br/>" . $row['nom_pdt']. "</li><br/>";
-			echo "<li> <h2>Prix du produit : </h2> <br/>" . $row['prix_pdt'] . "</li><br/>";
+			if($_SESSION[$mail]['niv_role']==3){
+				if($row['prixttc_pdt']!=0){
+					echo "<li> <h2>Prix du produit : </h2> <br/>" . $row['prixttc_pdt'] . "</li><br/>";
+				}else{
+					echo "<li> <h2>Prix du produit : </h2> <br/> A preciser </li><br/>";
+				}
+			}else{
+				if($row['prixht_pdt']!=0){
+					echo "<li> <h2>Prix du produit : </h2> <br/>" . $row['prixht_pdt'] . "</li><br/>";
+				}else{
+					echo "<li> <h2>Prix du produit : </h2> <br/> A preciser</li><br/>";
+				}
+			}
 			echo "<li> <h2>Type de matériau : </h2> <br/>" . $row['type_mat'] . "</li><br/>";
 			echo "<li> <h2>Forme du produit : </h2> <br/>" . $row['forme'] . "</li><br/>";
 			echo "<li> <h2>Poids du produit : </h2> <br/>" . $row['poids'] . "</li><br/>";
@@ -79,5 +91,19 @@ if(isset($_GET["id"]) and preg_match("/^\d+$/", $_GET["id"])){
 			</form> <?php 
 		}
 
+}
+
+if($_SESSION[$mail]['niv_role']==3){
+	if($row['prixttc_pdt']!=0){
+		echo "<li> <h2>Prix du produit : </h2> <br/>" . $row['prixttc_pdt'] . "</li><br/>";
+	}else{
+		echo "<li> <h2>Prix du produit : </h2> <br/> A preciser </li><br/>";
+	}
+}else{
+	if($row['prixht_pdt']!=0){
+		echo "<li> <h2>Prix du produit : </h2> <br/>" . $row['prixht_pdt'] . "</li><br/>";
+	}else{
+		echo "<li> <h2>Prix du produit : </h2> <br/> A preciser</li><br/>";
+	}
 }
 ?>
