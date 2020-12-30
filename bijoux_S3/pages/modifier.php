@@ -33,7 +33,8 @@ td,th { border : 1px solid black; width : 200px; height : 30px; text-align : cen
 <tr >
     <th> Id </th>
     <th> Nom </th>
-    <th> Prix </th>
+    <th> Prix HT </th>
+    <th> Prix TTC </th>
     <th> Quantité</th>
     <th> Matériau</th>
     <th> Nom image</th>
@@ -52,7 +53,8 @@ td,th { border : 1px solid black; width : 200px; height : 30px; text-align : cen
 			<tr>
 		        <td> <?php echo $row['id_pdt'] ?> </td>
 		        <td> <?php echo $row['nom_pdt'] ?> </td>
-		        <td> <?php echo $row['prix_pdt']?> </td>
+		        <td> <?php echo $row['prixht_pdt']?> </td>
+		        <td> <?php echo $row['prixttc_pdt']?> </td>
 		        <td> <?php echo $row['quantite']?> </td>
 		        <td> <?php echo $row['type_mat']?> </td>
 		        <td> <?php echo $row['nom_img']?> </td>

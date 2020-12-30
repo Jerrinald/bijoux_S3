@@ -54,12 +54,12 @@ CREATE TABLE produits (
     nom_pdt varchar(100) NOT NULL,
     prixht_pdt real,
     prixttc_pdt real,
-    quantite int,
+    quantite int DEFAULT 6,
     type_mat varchar(100),
     nom_img varchar(100) NOT NULL,
     forme varchar(100),
-    poids real,
-    prix_carat real,
+    poids varchar(100),
+    prix_carat varchar(100),
     PRIMARY KEY (`id_pdt`)
 ) ENGINE=InnoDB ;
 

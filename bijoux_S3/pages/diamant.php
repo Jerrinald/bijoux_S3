@@ -102,7 +102,12 @@ if(isset($_GET["action"]))
 				echo'</tr><tr>';
 				$nb_elem = 0;
 			}
-			component($row['id_pdt'], $row['nom_pdt'], $row['nom_img'], $row['prix_pdt']);
+
+			if($_SESSION[$mail]['niv_role']==3){
+				component2($row['id_pdt'], $row['nom_pdt'], $row['nom_img'], $row['prixttc_pdt']);
+			}else{
+				component1($row['id_pdt'], $row['nom_pdt'], $row['nom_img'], $row['prixht_pdt']);
+			}
 			$nb_elem++;
 		}
 		echo '</tr></table> </div>';
