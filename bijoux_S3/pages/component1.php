@@ -1,7 +1,20 @@
 <?php
 function component1($productid, $productname, $productimg, $productprice){
+    $totalprice=$productprice;
     ?>
     <!DOCTYPE html>
+    <head>
+        <script language="javascript">
+            function minmax(value, min, max) 
+            {
+                if(parseInt(value) < min) 
+                    return 1; 
+                else if(parseInt(value) > max) 
+                    return 3; 
+                else return value;
+            }
+        </script>
+    </head>
     <body>
         <form method="post" name="ajout" action="?action=add&id=<?php echo $productid;?> ">
         <td style="width:22%">
@@ -11,25 +24,15 @@ function component1($productid, $productname, $productimg, $productprice){
                 <br> <a href="details_produit.php?id=<?php echo $productid;?>"><?php echo $productname; ?></a>
                 <input type="hidden" name="hidden_name" value="<?php echo $productname; ?>">
                 <br><br>
-                <span class="new__price"><?php if($productprice!=0){echo "Prix HT : " . $productprice;}else{echo "A préciser";} ?></span>
+                <br/><span class="new__price"><?php if($productprice!=0){echo "Prix HT : " . $productprice;}else{echo "A préciser";} ?></span>
                 <input type="hidden" name="hidden_price" value="<?php echo $productprice; ?>"> 
                 <div class="input-counter">
                     <div>
-                        <span class="minus-btn">
-                            <svg>
-                                <use xlink:href="../images/sprite.svg#icon-minus"></use>
-                            </svg>
-                        </span>
-                        <input type="text" min="1" name="quantity" value="1" max="10" class="counter-btn">
-                        <span class="plus-btn">
-                            <svg>
-                                <use xlink:href="../images/sprite.svg#icon-plus"></use>
-                            </svg>
-                        </span>
+                        <label for="1" style="margin-top: 10px; margin-right: 10px">Quantité désirée :</label>
+                        <input type="text" name="quantity" maxlength="5" value="1" onkeyup="this.value = minmax(this.value, 1, 3)" class="counter-btn">
                     </div>
                 </div>                  
                 <div class="price">
-                    <span class="new__price"><?php echo 'Total : ' . $productprice; ?></span>
                 </div>
                 <input type="submit" value="Ajouter" name="add_to_cart" class="product__btn" style="width:65%">
             </div>
@@ -55,21 +58,11 @@ function component2($productid, $productname, $productimg, $productprice){
                 <input type="hidden" name="hidden_price" value="<?php echo $productprice; ?>"> 
                 <div class="input-counter">
                     <div>
-                        <span class="minus-btn">
-                            <svg>
-                                <use xlink:href="../images/sprite.svg#icon-minus"></use>
-                            </svg>
-                        </span>
-                        <input type="text" min="1" name="quantity" value="1" max="10" class="counter-btn">
-                        <span class="plus-btn">
-                            <svg>
-                                <use xlink:href="../images/sprite.svg#icon-plus"></use>
-                            </svg>
-                        </span>
+                        <label for="1" style="margin-top: 10px; margin-right: 10px">Quantité désirée :</label>
+                        <input type="text" name="quantity" maxlength="5" value="1" onkeyup="this.value = minmax(this.value, 1, 3)" class="counter-btn">
                     </div>
                 </div>                  
                 <div class="price">
-                    <span class="new__price"><?php echo 'Total : ' . $productprice; ?></span>
                 </div>
                 <input type="submit" value="Ajouter" name="add_to_cart" class="product__btn" style="width:65%">
             </div>

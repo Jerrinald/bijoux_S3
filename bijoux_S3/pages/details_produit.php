@@ -7,6 +7,16 @@
 		width: 20px;
 	}
 </style>
+<script language="javascript">
+	function minmax(value, min, max) 
+		{
+		if(parseInt(value) < min) 
+		    return 1; 
+		else if(parseInt(value) > max) 
+		    return 3; 
+		else return value;
+		}
+</script>
 
 <?php
 require('../menu/menu.php');
@@ -71,21 +81,19 @@ if(isset($_GET["id"]) and preg_match("/^\d+$/", $_GET["id"])){
 			?></ul></div>
 			<form method="post" name="ajout" action="?action=add&id=<?php echo $_GET["id"] ?> ">
 				<input type="hidden" name="hidden_name" value="<?php echo $row['nom_pdt']; ?>">
-				<input type="hidden" name="hidden_price" value="<?php echo $row['prix_pdt']; ?>"> 
-				<div class="input-counter" style="margin-top: -90px; padding-left: 600px; margin-bottom: -10px;">
+				<?php if($_SESSION[$mail]['niv_role']==3){
+					?><input type="hidden" name="hidden_price" value="<?php echo $row['prixttc_pdt']; ?>"> 
+				<?php }else{
+					?><input type="hidden" name="hidden_price" value="<?php echo $row['prixht_pdt']; ?>"> 
+				<?php } ?>
+				
+				<div class="input-counter" style="margin-top: -90px; padding-left: 550px; margin-bottom: -10px;">
                     <div>
-                        <span class="minus-btn">
-                            <svg>
-                                <use xlink:href="../images/sprite.svg#icon-minus"></use>
-                            </svg>
-                        </span>
-                        <input type="text" min="1" name="quantity" value="1" max="10" class="counter-btn">
-                        <span class="plus-btn">
-                            <svg>
-                                <use xlink:href="../images/sprite.svg#icon-plus"></use>
-                            </svg>
-                        </span>
+                        <label for="1" style="margin-top: 10px; margin-right: 10px">Quantité désirée :</label>
+                        <input type="text" name="quantity" maxlength="5" value="1" onkeyup="this.value = minmax(this.value, 1, 3)" class="counter-btn">
                     </div>
+                </div>                  
+                <div class="price">
                 </div>  
 				<input type="submit" value="Ajouter" name="add_to_cart" class="product__btn" style="width:25%; margin-left: 490px;">
 			</form> <?php 
@@ -93,17 +101,5 @@ if(isset($_GET["id"]) and preg_match("/^\d+$/", $_GET["id"])){
 
 }
 
-if($_SESSION[$mail]['niv_role']==3){
-	if($row['prixttc_pdt']!=0){
-		echo "<li> <h2>Prix du produit : </h2> <br/>" . $row['prixttc_pdt'] . "</li><br/>";
-	}else{
-		echo "<li> <h2>Prix du produit : </h2> <br/> A preciser </li><br/>";
-	}
-}else{
-	if($row['prixht_pdt']!=0){
-		echo "<li> <h2>Prix du produit : </h2> <br/>" . $row['prixht_pdt'] . "</li><br/>";
-	}else{
-		echo "<li> <h2>Prix du produit : </h2> <br/> A preciser</li><br/>";
-	}
-}
 ?>
+
