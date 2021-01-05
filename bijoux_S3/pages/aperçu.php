@@ -20,28 +20,42 @@ if(isset($_GET["action"]))
 }
 ?>
 <style type="text/css">
+
 table { border-collapse : collapse; margin : auto;  margin-left: 280px;}
 td,th { border : 0px; width : 200px; height : 30px; text-align : center;}
 
+p,
+label {
+    font: 2rem 'Fira Sans', sans-serif;
+    margin-top: 65px;
+    text-align: center;
+}
+
+input {
+    margin: .2rem;
+    margin-left: 580px;
+}
+
+button,
 .styled {
-	margin-left: 600px;
-	margin-top: 50px;
+	height: 70px;
+	width: 180px;
+    margin-left: 600px;
     border: 0;
     line-height: 2.5;
-    padding: 10 20px;
+    padding: 0 20px;
     font-size: 1rem;
     text-align: center;
     color: #fff;
     text-shadow: 1px 1px 1px #000;
     border-radius: 10px;
-    background-color: rgba(220, 0, 0, 1);
+    background-color: rgba(0, 0,200, 1);
     background-image: linear-gradient(to top left,
                                       rgba(0, 0, 0, .2),
                                       rgba(0, 0, 0, .2) 30%,
                                       rgba(0, 0, 0, 0));
     box-shadow: inset 2px 2px 3px rgba(255, 255, 255, .6),
                 inset -2px -2px 3px rgba(0, 0, 0, .6);
-
 }
 
 .styled:hover {
@@ -52,7 +66,9 @@ td,th { border : 0px; width : 200px; height : 30px; text-align : center;}
     box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),
                 inset 2px 2px 3px rgba(0, 0, 0, .6);
 }
+
 </style>
+
 
 
 <br/>
@@ -91,4 +107,13 @@ td,th { border : 0px; width : 200px; height : 30px; text-align : center;}
 				?>
 	</table>
 
-	<input class="favorite styled"        type="button"        value="Finalisez commande">
+	 <form action="devis.php" method="post">
+    <div>
+    </div>
+    <div>
+    </div>
+    <br/>
+    <div>
+    <input type="submit" name="submit" value="Finaliser commande" class="favorite styled" />
+    </div>
+  </form>
