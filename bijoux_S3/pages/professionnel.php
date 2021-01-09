@@ -26,8 +26,6 @@ if (isset($_REQUEST['nom'], $_REQUEST['prenom'], $_REQUEST['date_nai'], $_REQUES
               var_dump($resid);
               $se_id = "SELECT id_user from users where nom='$nom' and prenom='$prenom'";
               $result=mysqli_query($connect, $se_id);
-              var_dump($result);
-              
               $rows = mysqli_num_rows($result);
               $row = mysqli_fetch_array($result);
               $id = $row['id_user'];

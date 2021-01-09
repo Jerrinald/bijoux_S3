@@ -1,6 +1,6 @@
 <?php
 function component1($productid, $productname, $productimg, $productprice){
-    $totalprice=$productprice;
+    //affichage des produits avec le prix HT
     ?>
     <!DOCTYPE html>
     <head>
@@ -43,8 +43,21 @@ function component1($productid, $productname, $productimg, $productprice){
 <?php }
 
 function component2($productid, $productname, $productimg, $productprice){
+    //affichage des produits avec le prix TTC
     ?>
     <!DOCTYPE html>
+    <head>
+        <script language="javascript">
+            function minmax(value, min, max) 
+            {
+                if(parseInt(value) < min) 
+                    return 1; 
+                else if(parseInt(value) > max) 
+                    return 3; 
+                else return value;
+            }
+        </script>
+    </head>
     <body>
         <form method="post" name="ajout" action="?action=add&id=<?php echo $productid;?> ">
         <td style="width:22%">

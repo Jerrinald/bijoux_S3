@@ -19,11 +19,15 @@ INSERT INTO `produits` (`nom_pdt`, `prixht_pdt`, `quantite`,`type_mat`,`nom_img`
 ('Amethyste',250.99, 5, 'pierre', 'pierre1.jpg', 'ovale', 2.5, 10.45);
 
 INSERT INTO `users` (`nom`, `prenom`, `niv_role`) VALUES
+('Super', 'User', 5),
 ('Bezos', 'Jeff', 4),
 ('Musk', 'Elon', 4);
 
 INSERT INTO `collaborateurs` (`id_collabo`, `nom_collabo`, `prenom_collabo`, `adr_mail_collabo`, `password`) VALUES
-(2, 'Bezos', 'Jeff', 'collaboA@gmail.com', PASSWORD('collaboA_serviceplus'));
+(2, 'Bezos', 'Jeff', 'collaboA@gmail.com', SHA2('collaboA_serviceplus', 256));
 
 INSERT INTO `collaborateurs` (`id_collabo`, `nom_collabo`, `prenom_collabo`, `adr_mail_collabo`, `password`) VALUES
-(3, 'Musk', 'Elon', 'collaboB@gmail.com', PASSWORD('collaboB_serviceplus'));
+(3, 'Musk', 'Elon', 'collaboB@gmail.com', SHA2('collaboB_serviceplus', 256));
+
+INSERT INTO `administrateurs` (`id_admin`, `nom_admin`, `prenom_admin`, `adr_mail_admin`, `password`) VALUES
+(1, 'Super', 'User', 'superuser@gmail.com', SHA2('superuser_serviceplus', 256));

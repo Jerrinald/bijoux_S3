@@ -3,7 +3,7 @@ require('../menu/menu.php');
 require_once ('config.php');
 require_once ('component1.php');
 
-
+//l'ajout des produits dans la session shopping_cart
 if (isset($_POST['add_to_cart'])){
 	if (isset($_SESSION[$mail]['shopping_cart'])){
 		$item_array_id= array_column($_SESSION[$mail]["shopping_cart"], "item_id");
@@ -55,6 +55,7 @@ if(isset($_GET["action"]))
 <html>
 <head>
 	<script>
+    //fonction qui permet de filtrer avec le filtre
 	function showUser(str) {
 	  if (str == "") {
 	    document.getElementById("txtHint").innerHTML = "";
@@ -63,9 +64,11 @@ if(isset($_GET["action"]))
 	    var xmlhttp = new XMLHttpRequest();
 	    xmlhttp.onreadystatechange = function() {
 	      if (this.readyState == 4 && this.status == 200) {
+	      	//affiche les résultats dans la div txtHint en fonction du filtre
 	        document.getElementById("txtHint").innerHTML = this.responseText;
 	      }
 	    };
+	    //envoie le résultat du filtre à get_diamant.php
 	    xmlhttp.open("GET","get_diamant.php?q="+str,true);
 	    xmlhttp.send();
 	  }
@@ -78,6 +81,7 @@ if(isset($_GET["action"]))
 	<br>
 	<div class="nav" style="width:20%; margin-left: 150px;">
 		<h2>Filtrer</h2>
+		<!-- les filtres à applliquer -->
 		<select class="product__footer" id="users" name="users" onchange="showUser(this.value)" style="width:35%;">
 			<option value="id_pdt">Filtrer par</option>
 			<option value="prix_pdt">Prix</option>
@@ -89,6 +93,8 @@ if(isset($_GET["action"]))
 	<br>
 	<div id="txtHint">
 	<?php
+	//la div txtHint qui affiche de base tous les diamants si aucun iltre n'est appliquée
+	//fais appel à la fonction component1 ou component2 en fonction de prix à aficher(HT ou TTC) qui est dans component1.php
 	$query = "SELECT * FROM produits where type_mat='diamant' ";
 	$result = mysqli_query($connect, $query);
 	if(mysqli_num_rows($result) > 0)
@@ -103,10 +109,10 @@ if(isset($_GET["action"]))
 				$nb_elem = 0;
 			}
 
-			if($_SESSION[$mail]['niv_role']==3){
-				component2($row['id_pdt'], $row['nom_pdt'], $row['nom_img'], $row['prixttc_pdt']);
-			}else{
+			if($_SESSION[$mail]['niv_role']==4){
 				component1($row['id_pdt'], $row['nom_pdt'], $row['nom_img'], $row['prixht_pdt']);
+			}else{
+				component2($row['id_pdt'], $row['nom_pdt'], $row['nom_img'], $row['prixttc_pdt']);
 			}
 			$nb_elem++;
 		}

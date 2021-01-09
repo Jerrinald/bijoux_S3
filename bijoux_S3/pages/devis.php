@@ -13,7 +13,35 @@ if(empty($_SESSION[$mail]["shopping_cart"])){
 	echo "panier vide";
 }else{
 
-	ob_start(); ?>
+
+	ob_start();
+	$client=$mail;
+
+	if($_SESSION[$mail]['niv_role']==3){
+
+		$cl_req = "SELECT * from professionnels where adr_mail_pro='$client'";
+		$result=mysqli_query($connect, $cl_req);
+		$row = mysqli_fetch_array($result);
+
+	    $nom = $row['nom_pro'];
+	    $prenom = $row['prenom_pro'];
+	    $cl_adr = $row['adr_mail_pro'];
+	    $societe = $row['nom_societe'];
+	   	$siret = $row['num_siret'];
+
+	}elseif ($_SESSION[$mail]['niv_role']==2) {
+
+		$cl_req = "SELECT * from particuliers where adr_mail_part='$client'";
+		$result=mysqli_query($connect, $cl_req);
+		$row = mysqli_fetch_array($result);
+
+	    $nom = $row['nom_part'];
+	    $prenom = $row['prenom_part'];
+	    $cl_adr = $row['adr_mail_part'];
+
+		}
+
+	 ?>
 
 	<style type="text/css">
 		table { 
@@ -55,6 +83,21 @@ if(empty($_SESSION[$mail]["shopping_cart"])){
 
 
 	<page backtop="20mm" backleft="10mm" backright="10mm" backbottom="30mm">
+		<table style="vertical-align: top;">
+	        <tr>
+	            <td class="75p">
+	                <strong><?php echo $nom . " " . $prenom; ?></strong><br />
+	                <?php if(isset($societe)){echo $societe . "<br />";}else{echo "";} ?>
+	                <strong>SIRET:</strong> <?php if(isset($siret)){echo $siret . "<br />";}else{echo "";} ?>
+	                <?php echo $cl_adr; ?>
+	            </td>
+	            <td class="25p">
+	                <strong><?php echo "Service+ Diamant"; ?></strong><br />
+	                <?php echo "Belgique, 13 rue du pavillon"; ?><br />
+	            </td>
+	        </tr>
+	    </table>
+
 		<table style="margin-top: 50px;">
 	        <tr>
 	            <td class="50p"><h2></h2></td>

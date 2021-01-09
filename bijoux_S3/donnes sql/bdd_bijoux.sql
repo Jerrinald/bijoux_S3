@@ -79,7 +79,7 @@ CREATE TABLE vendu (
 
 
 CREATE TABLE administrateurs (
-  `id_admin` int(11) NOT NULL,
+  id_admin int(11) NOT NULL,
   nom_admin varchar(100) NOT NULL,
   prenom_admin varchar(100) NOT NULL,
   adr_mail_admin varchar(100) NOT NULL,
@@ -90,7 +90,7 @@ CREATE TABLE administrateurs (
 ) ENGINE=InnoDB ;
 
 CREATE TABLE collaborateurs (
-  `id_collabo` int(11) NOT NULL,
+  id_collabo int(11) NOT NULL,
   nom_collabo varchar(100) NOT NULL,
   prenom_collabo varchar(100) NOT NULL,
   adr_mail_collabo varchar(100) NOT NULL,
