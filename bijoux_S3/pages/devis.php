@@ -154,6 +154,8 @@ if(empty($_SESSION[$mail]["shopping_cart"])){
         $pdf->writeHTML($content);
         ob_get_clean();
         $pdf->Output('Devis.pdf');
+        $pdf->Output('C:/wamp64/www/service_plus_diamant/bijoux_S3/bijoux_S3/pages/Devis.pdf', 'F');
+        //$pdf->Output('http://localhost/service_plus_diamant/bijoux_S3/bijoux_S3/pages/Devis.pdf', 'F');
     } catch (HTML2PDF_exception $e) {
         die($e);
     }

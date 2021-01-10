@@ -117,3 +117,9 @@ button,
     <input type="submit" name="submit" value="Finaliser commande" class="favorite styled" />
     </div>
   </form>
+
+<br/><br/><br/>
+
+<a href="./Devis.pdf" tabindex="-1"><strong>click here</strong></a>
+
+
