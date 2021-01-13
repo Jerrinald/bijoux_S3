@@ -2,6 +2,8 @@
 require('../menu/menu.php');
 require_once ('config.php'); ?>
 
+<!----l'assignation sur un professionnel se fait ici ---->
+
 <style type="text/css">
 	p,
 label {
@@ -51,10 +53,13 @@ button,
 </style>
 
 <?php 
+//si le formulaire a été renseigné
 if(isset($_POST['submit'])){
+  //mettre à jour dans la table professionnel le champs assigne sur le professionnel concerné
   $query = "UPDATE `professionnels` SET assigne=1 WHERE id_pro= " . $_GET["id"];
   $result = mysqli_query($connect, $query);
 
+  //on insere dans la table assignation le professionnel et le professionnel qui lui est assigné
   $assign = "INSERT into `assignation` (id_pro, id_collabo)
               VALUES (" . $_GET['id'] ."," . $_REQUEST['col'] .")";
   $res = mysqli_query($connect, $assign);

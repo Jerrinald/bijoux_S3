@@ -2,14 +2,19 @@
 require_once ('config.php');
 require('../menu/menu.php');
 
+//aperçu du panier
+
+//si un produit est supprimer du panier
 if(isset($_GET["action"]))
 {
+	//recoit l'action delete
 	if($_GET["action"] == "delete")
 	{
 		foreach($_SESSION[$mail]["shopping_cart"] as $keys => $values)
 		{
 			if($values["item_id"] == $_GET["id"])
 			{
+				//on le suppprime de la session du panier et on decrement le compteur
 				$_SESSION[$mail]['compteur']-=1;
 				unset($_SESSION[$mail]["shopping_cart"][$keys]);
 				//echo '<script>alert("Item Removed")</script>';
@@ -69,7 +74,7 @@ button,
 
 </style>
 
-
+<!---Afficher le panier----->
 
 <br/>
 <h3 style="text-align: center; margin-top: 25px;">Details panier</h3>
@@ -83,7 +88,7 @@ button,
 			<th>Action</th>
 		</tr>
 		<?php
-		
+		//affiche tous les produits présents dans le panier avec le nom, la qtité et le prix unitaire et le prix en fonction de la qtité
 		if(!empty($_SESSION[$mail]["shopping_cart"])){
 			$total = 0;
 			foreach($_SESSION[$mail]["shopping_cart"] as $keys => $values){
@@ -100,6 +105,7 @@ button,
 					}
 				?>
 				<tr>
+					<!---affiche le prix total du panier ---->
 					<td colspan="4" align="right">Total : <?php echo number_format($total, 2); ?></td>
 				</tr>
 				<?php

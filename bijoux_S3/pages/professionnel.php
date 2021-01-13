@@ -2,6 +2,8 @@
 require('config.php');
 require('../menu/menu.php');
 
+//formulaire d'inscription des professionnels
+
 if (isset($_REQUEST['nom'], $_REQUEST['prenom'], $_REQUEST['date_nai'], $_REQUEST['nom_soc'], $_REQUEST['adr_mail'], $_REQUEST['num_tel'], $_REQUEST['num_sir'], $_REQUEST['password'], $_REQUEST['mat'])){
   if(preg_match("/^[a-zA-Z]+$/", $_REQUEST['nom'])){
     $nom = $_REQUEST['nom'];

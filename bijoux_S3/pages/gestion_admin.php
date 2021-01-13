@@ -2,6 +2,8 @@
 require('../menu/menu.php');
 ?>
 
+<!----Interface administrateur ---->
+
 <br/><h1 style="text-align: center; margin-top: 50px;">Produits</h1>
 <div class="cart-btns" style="width: 520px;
     margin-left: 470px;

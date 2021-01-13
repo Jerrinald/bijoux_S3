@@ -8,6 +8,7 @@
 	}
 </style>
 <script language="javascript">
+	//permet de reguler la qtite indiqué dans le champs
 	function minmax(value, min, max) 
 		{
 		if(parseInt(value) < min) 
@@ -22,6 +23,8 @@
 require('../menu/menu.php');
 require_once('config.php');
 
+
+//si le produit est ajouter au panier
 if (isset($_POST['add_to_cart'])){
 	if (isset($_SESSION[$mail]['shopping_cart'])){
 		$item_array_id= array_column($_SESSION[$mail]["shopping_cart"], "item_id");
@@ -51,8 +54,10 @@ if (isset($_POST['add_to_cart'])){
 	echo '<script>window.location="aperçu.php"</script>';
 }
 
+//si un id est present dans l'URL
 if(isset($_GET["id"]) and preg_match("/^\d+$/", $_GET["id"])){
 
+	//affiche le produit lié à l'id indiqué dan l'URL avec toutes ses caractéristiques(forme, poids ...)
 	$query = "SELECT * FROM produits where id_pdt=". $_GET["id"];
 	$result = mysqli_query($connect, $query);
 

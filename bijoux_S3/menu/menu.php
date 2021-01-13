@@ -1,18 +1,24 @@
 ﻿<?php 
 
+//on active la session
 session_start();
 
+//si un membre s'est connecté(sa session avec le mail et son niveau de rôle a été lors de sa connexion réussie) on crée sa session $mail
 if(isset($_SESSION['mail']) && isset($_SESSION['niv_role'])){
+  //on supprime la session du visteur comme c'est un membre connecté
    unset($_SESSION['visiteur']);
    $mail = $_SESSION['mail'];
    $niv_role = $_SESSION['niv_role'];
 }else{
+  //si ce n'est pas un membre connecté on a lui affecte la session de visiteur
   $mail = 'visiteur';
   $niv_role = 1;
 }
+//on affecte les attributs dans la session du $mail
 $_SESSION[$mail]['niv_role'] = $niv_role;
+//si la session lié au panier n'existe pas, alors on instancie le compteur du panier à 0
 if(!isset($_SESSION[$mail]['shopping_cart'])){
-  $_SESSION[$mail]['compteur'] =0;
+  $_SESSION[$mail]['compteur'] = 0;
 }
 
 

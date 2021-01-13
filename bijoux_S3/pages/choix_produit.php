@@ -2,6 +2,8 @@
 require('../menu/menu.php');
 ?>
 
+<!--Choix du catalogue--->
+
 <br/><h1 style="text-align: center; margin-top: 100px;">Quel catalogue voulez-vous voir ?</h1>
 
 <br/><div class="cart-btns" style="width: 420px;

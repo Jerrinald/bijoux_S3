@@ -3,7 +3,9 @@
 require('config.php');
 require('../menu/menu.php');
 
+//si les champs suivants sont transmis
 if (isset($_REQUEST['nom'], $_REQUEST['prenom'], $_REQUEST['date_nai'], $_REQUEST['adr_mail'], $_REQUEST['num_tel'], $_REQUEST['password'])){
+  //on recupere les valeus passsés dans des variables si les vaiables sont correctes
  if(preg_match("/^[a-zA-Z]+$/", $_REQUEST['nom'])){
     $nom = $_REQUEST['nom'];
     if(preg_match("/^[a-zA-Z]+$/", $_REQUEST['prenom'])){
@@ -16,10 +18,12 @@ if (isset($_REQUEST['nom'], $_REQUEST['prenom'], $_REQUEST['date_nai'], $_REQUES
             $num_tel = $_REQUEST['num_tel'];
             $password = $_REQUEST['password'];
 
+            //insertion dans la table users des champs nom, prenom et le niveau de role
             $quid = "INSERT into `users` (nom, prenom, niv_role)
               VALUES ('$nom', '$prenom', 2)";
             $resid = mysqli_query($connect, $quid);
 
+            //recuperer l'id du user qui vient d'être insérer dans la table user
             $se_id = "SELECT id_user from users where nom='$nom' and prenom='$prenom'";
             $result=mysqli_query($connect, $se_id);
             
@@ -27,33 +31,28 @@ if (isset($_REQUEST['nom'], $_REQUEST['prenom'], $_REQUEST['date_nai'], $_REQUES
             $row = mysqli_fetch_array($result);
             $id = $row['id_user'];
 
+            //inserer les valeurs transmises dans la table particuliers dont l'id qui vient d'être récupérer
             $query = "INSERT into `particuliers` (id_part, nom_part, prenom_part, date_nai_part, adr_mail_part, num_tel, password)
               VALUES ('$id', '$nom', '$prenom', '$date_nai', '$adr_mail', '$num_tel', '".hash('sha256', $password)."')";
-              // Exécute la requête sur la base de données
+              // Exécute la requête 
             $res = mysqli_query($connect, $query);
+            //si la requete a fonctionner on affiche le succes
             if($res){
                echo "<div class='sucess'>
                      <h3>Vous êtes inscrit avec succès.</h3>
                      <p>Cliquez ici pour vous <a href='login.php'>connecter</a></p>
                </div>";
-            }
+            }//sinon on affiche quel est l'erreur qui a été faîtes
           }else{ echo "<p> Numéro incorrect ou vide</p>"; }
         }else{ echo "<p> Mail incorrect ou vide</p>"; }
       }else{ echo "<p> Date naissance incorrect ou vide</p>"; }
     }else{ echo "<p> Prénom incorrect ou vide</p>"; }
   }else{ echo "<p> Nom incorrect ou vide</p>"; }
- /* // récupérer le nom d'utilisateur et supprimer les antislashes ajoutés par le formulaire
-  $username = stripslashes($_REQUEST['username']);
-  $username = mysqli_real_escape_string($conn, $username); 
-  // récupérer l'email et supprimer les antislashes ajoutés par le formulaire
-  $email = stripslashes($_REQUEST['email']);
-  $email = mysqli_real_escape_string($conn, $email);
-  // récupérer le mot de passe et supprimer les antislashes ajoutés par le formulaire
-  $password = stripslashes($_REQUEST['password']);
-  $password = mysqli_real_escape_string($conn, $password);*/
-  //requéte SQL + mot de passe crypté
+
 }else{
 ?>
+
+<!----formulaire du professionnel ----->
 <form class="box" action="" method="post">
 	<h1 class="box-logo box-title"><a href="../index.php">S'inscrire</a></h1>
     <h1 class="box-title">Particulier</h1>
