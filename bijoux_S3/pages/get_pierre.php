@@ -18,7 +18,8 @@ if(mysqli_num_rows($res) > 0)
 			echo'</tr><tr>';
 			$nb_elem = 0;
 		}
-		component($row['id_pdt'], $row['nom_pdt'], $row['nom_img'], $row['prix_pdt']);
+		component2($row['id_pdt'], $row['nom_pdt'], $row['nom_img'], $row['prixttc_pdt']);
+		
 		$nb_elem++;
 	}
 	echo '</tr></table> </div>';

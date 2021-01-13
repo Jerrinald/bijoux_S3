@@ -419,9 +419,11 @@ require('../menu/menu.php');
           <div class="category__center"></div>
         </div>
     </div>
+    <?php if($_SESSION[$mail]['niv_role']>3){?>
       <div class="continue__shopping" style="margin-left: 550px; margin-bottom: 45px;" >
               <a href="gestion_admin.php">Gestion utilisateurs/produits</a>
-      </div>" 
+      </div>
+    <?php } ?>
     </section>
 
     

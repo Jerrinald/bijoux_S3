@@ -21,6 +21,6 @@ require('../menu/menu.php');
 			<a href="gestion_utilisateur.php">Gestion utilisateur</a>
 	</div>
 	<div class="continue__shopping">
-			<a href="assignation_collabo.php">Assignation collaborateur</a>
+			<a href="liste_a_assigner.php">Assignation collaborateur</a>
 	</div>
 </div>

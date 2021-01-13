@@ -12,7 +12,7 @@ if (isset($_REQUEST['nom'], $_REQUEST['prenom'], $_REQUEST['date_nai'], $_REQUES
         $date_nai = $_REQUEST['date_nai'];
         if(preg_match("/^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/", $_REQUEST['adr_mail'])){
           $adr_mail = $_REQUEST['adr_mail'];
-          if(preg_match("/^0[1-68]([-. ]?[0-9]{2}){4}$/", $_REQUEST['num_tel'])){
+          if(preg_match("/^0[1-8]([-. ]?[0-9]{2}){4}$/", $_REQUEST['num_tel'])){
             $num_tel = $_REQUEST['num_tel'];
             $password = $_REQUEST['password'];
 

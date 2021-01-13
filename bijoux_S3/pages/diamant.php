@@ -84,7 +84,9 @@ if(isset($_GET["action"]))
 		<!-- les filtres à applliquer -->
 		<select class="product__footer" id="users" name="users" onchange="showUser(this.value)" style="width:35%;">
 			<option value="id_pdt">Filtrer par</option>
-			<option value="prix_pdt">Prix</option>
+			<?php if($_SESSION[$mail]['niv_role']==3){?>
+			<option value="prixht_pdt">Prix</option><?php }else{?>
+			<option value="prixttc_pdt">Prix</option> <?php } ?>
 			<option value="forme">Forme</option>
 			<option value="poids">Poids</option>
 			<option value="prix_carat">Prix au carat</option>
@@ -109,7 +111,7 @@ if(isset($_GET["action"]))
 				$nb_elem = 0;
 			}
 
-			if($_SESSION[$mail]['niv_role']==4){
+			if($_SESSION[$mail]['niv_role']==3){
 				component1($row['id_pdt'], $row['nom_pdt'], $row['nom_img'], $row['prixht_pdt']);
 			}else{
 				component2($row['id_pdt'], $row['nom_pdt'], $row['nom_img'], $row['prixttc_pdt']);

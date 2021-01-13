@@ -1,9 +1,9 @@
 <?php
-require_once('../menu/menu.php');
+require('../menu/menu.php');
 require_once ('config.php');
 require_once ('component1.php');
 
-
+//l'ajout des produits dans la session shopping_cart
 if (isset($_POST['add_to_cart'])){
 	if (isset($_SESSION[$mail]['shopping_cart'])){
 		$item_array_id= array_column($_SESSION[$mail]["shopping_cart"], "item_id");
@@ -18,7 +18,7 @@ if (isset($_POST['add_to_cart'])){
 		$_SESSION[$mail]["shopping_cart"][$count] = $item_array;
 		$_SESSION[$mail]['compteur']+=1;
 		}else{
-			echo '<script>alert("Item deja Ajouté")</script>';
+			echo '<script>alert("Item deja ajouté")</script>';
 		}
 	}else{
 		$item_array=array(
@@ -33,6 +33,7 @@ if (isset($_POST['add_to_cart'])){
 	echo '<script>window.location="pierre.php"</script>';
 }
 
+
 if(isset($_GET["action"]))
 {
 	if($_GET["action"] == "delete")
@@ -43,7 +44,7 @@ if(isset($_GET["action"]))
 			{
 				unset($_SESSION["shopping_cart"][$keys]);
 				//echo '<script>alert("Item Removed")</script>';
-				echo '<script>window.location="pierre.php"</script>';
+				echo '<script>window.location="diamant.php"</script>';
 			}
 		}
 	}
@@ -53,28 +54,49 @@ if(isset($_GET["action"]))
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" href="styles.css" />
+	<script>
+    //fonction qui permet de filtrer avec le filtre
+	function showUser(str) {
+	  if (str == "") {
+	    document.getElementById("txtHint").innerHTML = "";
+   		return;
+	  } else {
+	    var xmlhttp = new XMLHttpRequest();
+	    xmlhttp.onreadystatechange = function() {
+	      if (this.readyState == 4 && this.status == 200) {
+	      	//affiche les résultats dans la div txtHint en fonction du filtre
+	        document.getElementById("txtHint").innerHTML = this.responseText;
+	      }
+	    };
+	    //envoie le résultat du filtre à get_diamant.php
+	    xmlhttp.open("GET","get_pierre.php?q="+str,true);
+	    xmlhttp.send();
+	  }
+	}
+	</script>
 </head>
 <body>
 	<br>
-	<h1 style="color:blue; text-align: center;">Le catalogue des pierres</h1>
+	<h1 style="color:blue; text-align: center;">Le catalogue des diamants</h1>
 	<br>
 	<div class="nav" style="width:20%; margin-left: 150px;">
 		<h2>Filtrer</h2>
-		<select id="prix" class="product__footer" style="width:35%;">
-			<option>Filtrer par</option>
-			<option>Forme</option>
-			<option>Poids</option>
-			<option>Prix au carat</option>
+		<!-- les filtres à applliquer -->
+		<select class="product__footer" id="users" name="users" onchange="showUser(this.value)" style="width:35%;">
+			<option value="id_pdt">Filtrer par</option>
+			<?php if($_SESSION[$mail]['niv_role']==3){?>
+			<option value="prixht_pdt">Prix</option><?php }else{?>
+			<option value="prixttc_pdt">Prix</option> <?php } ?>
+			<option value="forme">Forme</option>
+			<option value="poids">Poids</option>
+			<option value="prix_carat">Prix au carat</option>
 		</select>
 	</div>
+	<br>
+	<div id="txtHint">
 	<?php
-	/*if(isset($_GET['choix']) === true){
-		echo $_GET['choix'];
-	}*/
-	 /*$q = $_GET['q'];
-	 mysqli_select_db($connect,"ajax_demo");
-	 var_dump($q);*/
+	//la div txtHint qui affiche de base tous les diamants si aucun iltre n'est appliquée
+	//fais appel à la fonction component1 ou component2 en fonction de prix à aficher(HT ou TTC) qui est dans component1.php
 	$query = "SELECT * FROM produits where type_mat='pierre' ";
 	$result = mysqli_query($connect, $query);
 	if(mysqli_num_rows($result) > 0)
@@ -88,16 +110,17 @@ if(isset($_GET["action"]))
 				echo'</tr><tr>';
 				$nb_elem = 0;
 			}
-			
+
 			if($_SESSION[$mail]['niv_role']==3){
-				component2($row['id_pdt'], $row['nom_pdt'], $row['nom_img'], $row['prixttc_pdt']);
-			}else{
 				component1($row['id_pdt'], $row['nom_pdt'], $row['nom_img'], $row['prixht_pdt']);
+			}else{
+				component2($row['id_pdt'], $row['nom_pdt'], $row['nom_img'], $row['prixttc_pdt']);
 			}
 			$nb_elem++;
 		}
+		echo '</tr></table> </div>';
 	}
-		echo '</tr></table> </div>';  ?>
-
-	<br/>
+		 ?>
+     </div> 
+    <br/>
 </html>

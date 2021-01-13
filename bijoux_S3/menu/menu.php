@@ -83,6 +83,11 @@ if(!isset($_SESSION[$mail]['shopping_cart'])){
               <li class="nav__item">
                 <a href="diamant.php" class="nav__link">Diamant</a>
               </li>
+              <?php if($_SESSION[$mail]['niv_role']>3){?>
+              <li class="nav__item">
+                <a href="gestion_admin.php" class="nav__link">Gestion utilisateurs/produits</a>
+              </li>
+            <?php } ?>
             </ul>
           </div>
 
