@@ -29,6 +29,10 @@ if($_SESSION[$mail]['niv_role']==1){
 		    $societe = $row['nom_societe'];
 		   	$siret = $row['num_siret'];
 
+		   	/*if($row['assigne']==0){
+		   		header("Location: aperçu.php");
+		   	}*/
+
 		}elseif ($_SESSION[$mail]['niv_role']==2) {
 
 			$cl_req = "SELECT * from particuliers where adr_mail_part='$client'";
@@ -81,19 +85,23 @@ if($_SESSION[$mail]['niv_role']==1){
 		    .60p { width: 60%; } .75p { width: 75%; }
 		</style>
 
-
 		<page backtop="20mm" backleft="10mm" backright="10mm" backbottom="30mm">
+			<strong ><?php echo "Service+ Diamant"; ?></strong><br />
+				<?php echo "Belgique, 13 rue du pavillon"; ?>
 			<table style="vertical-align: top;">
 		        <tr>
 		            <td class="75p">
+		                <?php echo "Tel :"; ?><br/>
+		                <?php echo "Fax :"; ?><br/>
+		                <?php echo "R.C.S :"; ?><br/>
+		                <?php echo "SIRET :"; ?><br/>
+		                <?php echo "N/id CEE :"; ?><br/>
+		            </td>
+		            <td class="25p">
 		                <strong><?php echo $nom . " " . $prenom; ?></strong><br />
 		                <?php if(isset($societe)){echo $societe . "<br />";}else{echo "";} ?>
 		                <?php if(isset($siret)){?><strong>SIRET:</strong> <?php echo $siret . "<br />";}else{echo "";} ?>
 		                <?php echo $cl_adr; ?>
-		            </td>
-		            <td class="25p">
-		                <strong><?php echo "Service+ Diamant"; ?></strong><br />
-		                <?php echo "Belgique, 13 rue du pavillon"; ?><br />
 		            </td>
 		        </tr>
 		    </table>

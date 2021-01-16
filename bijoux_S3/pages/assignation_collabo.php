@@ -64,19 +64,24 @@ if(isset($_POST['submit'])){
               VALUES (" . $_GET['id'] ."," . $_REQUEST['col'] .")";
   $res = mysqli_query($connect, $assign);
 
+    //on affiche succes si ça a fonctionné
     if($result and $res){
       echo "<p>Assignation réalisé avec succès. <a href='liste_a_assigner.php'>Cliquez ici pour revenir à la liste</a></p>";
+    //sinon echec
     }else{
       echo "Echec";
     }
 }else{
+  //on affiche le formulaire d'assignation
 
+  //on selectionne le professionel par rapport à son ID
   if(isset($_GET["id"]) and preg_match("/^\d+$/", $_GET["id"])){
     $query = "SELECT * FROM professionnels where id_pro=". $_GET["id"];
     $result = mysqli_query($connect, $query); ?>
 
    <div class="as">
-    <?php while($row = mysqli_fetch_array($result)){
+    <?php //on affiche le professionnel concerne
+     while($row = mysqli_fetch_array($result)){
       echo "<p>Monsieur " . $row['nom_pro'] . " vient de s'inscrire. Il semblerait qu'il soit plus interessé par les " . $row['interet'] . "</p><br/>";
     }
   }
@@ -84,6 +89,7 @@ if(isset($_POST['submit'])){
   </div>
   <p>A qui voulez-vous l'assignez ?</p><br/><br/>
 
+  <!-----le formulaire----->
   <form action="?id=<?php echo $_GET["id"]; ?>" method="post">
     <div>
     <input type="checkbox" name="col" value="2"> Collaborateur A
