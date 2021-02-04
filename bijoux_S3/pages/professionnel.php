@@ -12,6 +12,10 @@ if (isset($_REQUEST['nom'], $_REQUEST['prenom'], $_REQUEST['date_nai'], $_REQUES
       if(preg_match("/^([0-9]{4})(-[0-9]{2}){2}$/", $_REQUEST['date_nai'])){
         $date_nai = $_REQUEST['date_nai'];
         if(preg_match("/^((\d){3} ){3}\d{5}$/", $_REQUEST['num_sir'])){
+          /*$siret = preg_replace("/[^d]+/", '', $_REQUEST['num_sir']);
+          if(checkLuhn($siret)){
+			
+          } */
           $num_sir = $_REQUEST['num_sir'];
           if(preg_match("/^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/", $_REQUEST['adr_mail'])){
             $adr_mail = $_REQUEST['adr_mail'];

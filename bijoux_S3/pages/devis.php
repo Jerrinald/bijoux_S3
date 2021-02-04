@@ -5,6 +5,10 @@ require_once('config.php');
 require __DIR__.'/vendor/autoload.php';
 use Spipu\Html2Pdf\Html2Pdf;
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
 if($_SESSION[$mail]['niv_role']==1){
 	header("Location: login.php");
 }else{
@@ -29,9 +33,9 @@ if($_SESSION[$mail]['niv_role']==1){
 		    $societe = $row['nom_societe'];
 		   	$siret = $row['num_siret'];
 
-		   	/*if($row['assigne']==0){
+		   	if($row['assigne']==0){
 		   		header("Location: aperçu.php");
-		   	}*/
+		   	}
 
 		}elseif ($_SESSION[$mail]['niv_role']==2) {
 
@@ -80,24 +84,58 @@ if($_SESSION[$mail]['niv_role']==1){
 		    }
 		    .space { padding-top: 250px; }
 		 
+		 	.coord td{  border: 1px solid #CFD1D2; 
+		        padding: 5px 10px; 
+		        text-align: center; 
+		          width: 22%; border-radius: 10px;}
+		    .first td{
+		    	border: 1px solid #CFD1D2; 
+		        padding: 5px 5px; 
+		        text-align: center; 
+		          width: 22%;
+		          border-bottom: none;
+		    }
+
 		    .10p { width: 10%; } .15p { width: 15%; } 
 		    .25p { width: 25%; } .50p { width: 50%; } 
 		    .60p { width: 60%; } .75p { width: 75%; }
 		</style>
 
-		<page backtop="20mm" backleft="10mm" backright="10mm" backbottom="30mm">
-			<strong ><?php echo "Service+ Diamant"; ?></strong><br />
-				<?php echo "Belgique, 13 rue du pavillon"; ?>
+		<page backtop="5mm" backleft="10mm" backright="10mm" backbottom="30mm">
+			<strong style="font-size: 15px;"><?php echo "Service+ Diamant"; ?><br />
+				<?php echo "Belgique, 13 rue du pavillon";  ?></strong>
+			<table style="margin-top: -45px; margin-left: 260px;" class="coord">
+				<tr><td><h4 style="position: absolute; margin-top: 30px;">Devis n°</h4></td></tr>
+			</table>
+			<table style="position: absolute; top: 25px; margin-left: 260px;" class="first">
+				<tr><td><p>Salut</p></td></tr>
+			</table>
+			<table style="margin-top: -69px; margin-left: 418px;" class="coord">
+				<tr><td><h4 style="position: absolute; margin-top: 30px;">Date</h4></td></tr>
+			</table>
+			<table style="position: absolute; top: 25px; margin-left: 418px;" class="first">
+				<tr><td><p><?php echo date("d/m/y"); ?></p></td></tr>
+			</table>
+			<table style="margin-top: -69px; margin-left: 578px;" class="coord">
+				<tr><td><h4 style="position: absolute; margin-top: 30px;">Client</h4></td></tr>
+			</table>
+			<table style="position: absolute; top: 25px; margin-left: 578px;" class="first">
+				<tr><td><p><?php echo $nom . " " . $prenom; ?></p></td></tr>
+			</table>
 			<table style="vertical-align: top;">
 		        <tr>
-		            <td class="75p">
+		            <td class="75p"><br/><br/>
 		                <?php echo "Tel :"; ?><br/>
 		                <?php echo "Fax :"; ?><br/>
 		                <?php echo "R.C.S :"; ?><br/>
 		                <?php echo "SIRET :"; ?><br/>
 		                <?php echo "N/id CEE :"; ?><br/>
 		            </td>
-		            <td class="25p">
+		        </tr>
+		    </table>
+		    <table style="margin-left: 455px;">
+		        <tr>
+		            <td>
 		                <strong><?php echo $nom . " " . $prenom; ?></strong><br />
 		                <?php if(isset($societe)){echo $societe . "<br />";}else{echo "";} ?>
 		                <?php if(isset($siret)){?><strong>SIRET:</strong> <?php echo $siret . "<br />";}else{echo "";} ?>
@@ -105,12 +143,7 @@ if($_SESSION[$mail]['niv_role']==1){
 		            </td>
 		        </tr>
 		    </table>
-
 			<table style="margin-top: 50px;">
-		        <tr>
-		            <td class="50p"><h2></h2></td>
-		            <td class="50p" style="text-align: right;">Emis le <?php echo date("d/m/y"); ?></td>
-		        </tr>
 		        <tr>
 		            <td style="padding-top: 15px;" colspan="2"><strong>Bonjour, voici le détail de votre devis :</strong></td>
 		        </tr>
@@ -162,11 +195,49 @@ if($_SESSION[$mail]['niv_role']==1){
 	        $pdf->writeHTML($content);
 	        ob_get_clean();
 	        $pdf->Output('Devis.pdf');
-	        //$pdf->Output('C:/wamp64/www/service_plus_diamant/bijoux_S3/bijoux_S3/pages/Devis.pdf', 'F');
-	        //$pdf->Output('http://localhost/service_plus_diamant/bijoux_S3/bijoux_S3/pages/Devis.pdf', 'F');
+	        //$pdf->Output('Devis.pdf', 'S');
+	        //$pdf->Output('C:/wamp64/www/service_plus_diamant/bijoux_S3/bijoux_S3/devis/Devis.pdf', 'F');
 	    } catch (HTML2PDF_exception $e) {
 	        die($e);
 	    }
+
+	    // Instantiation and passing `true` enables exceptions
+		$mail1 = new PHPMailer();
+
+		$mail1->IsSMTP(); // active SMTP
+
+		$mail1->SMTPOptions = [
+		  'ssl' => [
+		    'verify_peer' => false,
+		    'verify_peer_name' => false,
+		    'allow_self_signed' => true
+		  ]
+		];
+
+		/*$mail1->SMTPDebug = SMTP::DEBUG_OFF; // debogage: 1 = Erreurs et messages, 2 = messages seulement
+		$mail1->Host = "SMTP.office365.com";
+		$mail1->SMTPAuth = true;  // Authentification SMTP active
+		//$mail->SMTPSecure = 'ssl'; // Gmail REQUIERT Le transfert securise
+		$mail1->SMTPSecure = "TLS";
+		$mail1->Port = 587;
+		$mail1->Username = "";
+		$mail1->Password = "";
+		$mail1->SetFrom('jerrinald95190@live.fr', 'Votre devis');
+		//$mail->addReplyTo('k.jerrinald@gmail.com', 'First Last');
+		$mail1->Subject = 'Le devis concernant votre commande sur le site de service+diamant';
+		$mail1->Body = 'Bonjour voici votre devis ci-joint en PDF.';
+		//$mail->msgHTML("Hello, look at this mail");
+		//$mail->AltBody = 'Hello, look at this mail';
+		$mail1->AddAddress($mail, 'Kanikainathan Jerrinald');
+		$mail1->addAttachment('C:\wamp64\www\service_plus_diamant\bijoux_S3\bijoux_S3\pages\Devis.pdf');
+		if(!$mail1->Send()) {
+			echo "Mail error: ". $mail1->ErrorInfo;
+		} else {
+			echo "Votre devis a été envoyée par mail, cliquez <a href='choix_produit.php'> ici pour revenir sur le site</a>;";
+		}*/
+
+		//header("Location: succes_devis.php");
+
 	}
 }
 ?>

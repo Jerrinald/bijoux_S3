@@ -89,7 +89,7 @@ if(isset($_POST['submit'])){
   </div>
   <p>A qui voulez-vous l'assignez ?</p><br/><br/>
 
-  <!-----le formulaire----->
+  <!-----le formulaire d'assignation----->
   <form action="?id=<?php echo $_GET["id"]; ?>" method="post">
     <div>
     <input type="checkbox" name="col" value="2"> Collaborateur A

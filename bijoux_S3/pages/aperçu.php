@@ -126,6 +126,6 @@ button,
 
 <br/><br/><br/>
 
-<a href="./Devis.pdf" tabindex="-1"><strong>click here</strong></a>
+<!--<a href="./Devis.pdf" tabindex="-1"><strong>click here</strong></a>--->
 
 
